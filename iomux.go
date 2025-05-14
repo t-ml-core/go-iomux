@@ -58,7 +58,7 @@ var (
 
 const deadlineDuration = 100 * time.Millisecond
 
-// Options todo
+// Option to override defaults settings
 type Option[T comparable] func(*Mux[T])
 
 func WithCustomDir[T comparable](dir string) Option[T] {
