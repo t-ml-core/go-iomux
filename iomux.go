@@ -299,10 +299,13 @@ func (mux *Mux[T]) createReceiver() (e error) {
 			}
 		}
 
-		mux.dir, e = os.MkdirTemp("", "mux")
-		if e != nil {
-			return
+		if mux.dir == "" {
+			mux.dir, e = os.MkdirTemp("", "mux")
+			if e != nil {
+				return
+			}
 		}
+
 		file := filepath.Join(mux.dir, "recv.sock")
 		mux.recvaddr, e = net.ResolveUnixAddr(mux.network, file)
 		if e != nil {
