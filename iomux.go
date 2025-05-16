@@ -301,7 +301,7 @@ func (mux *Mux[T]) createReceiver() (e error) {
 			}
 		}
 
-		mux.dir, e = os.MkdirTemp(mux.DirPrefix, "mux")
+		mux.dir, e = os.MkdirTemp(mux.dirPrefix, "mux")
 		if e != nil {
 			return
 		}
