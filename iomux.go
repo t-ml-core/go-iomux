@@ -17,7 +17,7 @@ import (
 type Mux[T comparable] struct {
 	network   string
 	dir       string
-	dirPrefix string
+	DirPrefix string
 	recvonce  sync.Once
 	recvaddr  *net.UnixAddr
 	recvconns []*net.UnixConn
@@ -64,7 +64,7 @@ type Option[T comparable] func(*Mux[T])
 
 func WithCustomDirPrefix[T comparable](dirPrefix string) Option[T] {
 	return func(m *Mux[T]) {
-		m.dirPrefix = dirPrefix
+		m.DirPrefix = dirPrefix
 	}
 }
 
@@ -300,7 +300,7 @@ func (mux *Mux[T]) createReceiver() (e error) {
 			}
 		}
 
-		mux.dir, e = os.MkdirTemp(mux.dirPrefix, "mux")
+		mux.dir, e = os.MkdirTemp(mux.DirPrefix, "mux")
 		if e != nil {
 			return
 		}
