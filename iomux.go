@@ -17,7 +17,7 @@ import (
 type Mux[T comparable] struct {
 	network   string
 	dir       string
-	DirPrefix string
+	dirPrefix string
 	recvonce  sync.Once
 	recvaddr  *net.UnixAddr
 	recvconns []*net.UnixConn
@@ -62,9 +62,9 @@ const deadlineDuration = 100 * time.Millisecond
 // Option to override defaults settings
 type Option[T comparable] func(*Mux[T])
 
-func WithCustomDirPrefix[T comparable](dirPrefix string) Option[T] {
+func WithDirPrefix[T comparable](dirPrefix string) Option[T] {
 	return func(m *Mux[T]) {
-		m.DirPrefix = dirPrefix
+		m.dirPrefix = dirPrefix
 	}
 }
 
@@ -89,14 +89,15 @@ func (mux *Mux[T]) Tag(tag T, opts ...Option[T]) (*os.File, error) {
 	if mux.closed {
 		return nil, MuxClosed
 	}
+
+	for _, opt := range opts {
+		opt(mux)
+	}
+
 	err := mux.createReceiver()
 	if err != nil {
 		mux.Close()
 		return nil, err
-	}
-
-	for _, opt := range opts {
-		opt(mux)
 	}
 
 	sender, err := mux.createSender(tag)
