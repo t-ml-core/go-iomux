@@ -332,7 +332,7 @@ func (mux *Mux[T]) startListener() error {
 			case "darwin":
 				bufsize = 2048
 			default:
-				bufsize = 20 * 65536
+				bufsize = 65536
 			}
 			conn, err := net.ListenUnixgram(mux.network, mux.recvaddr)
 			if err != nil {
