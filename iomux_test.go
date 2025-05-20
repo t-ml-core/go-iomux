@@ -5,21 +5,24 @@ import (
 	"encoding/binary"
 	"errors"
 	"fmt"
-	"github.com/stretchr/testify/assert"
-	"golang.org/x/sys/unix"
 	"io"
 	"os"
 	"os/exec"
 	"testing"
 	"time"
+
+	"github.com/stretchr/testify/assert"
+	"golang.org/x/sys/unix"
 )
 
 var networks = []string{
 	"unix", "unixgram", "unixpacket",
 }
 
-const sleepSecs = 0.0001
-const sleepDuration = time.Duration(sleepSecs * float64(time.Second))
+const (
+	sleepSecs     = 0.0001
+	sleepDuration = time.Duration(sleepSecs * float64(time.Second))
+)
 
 func TestMuxRead(t *testing.T) {
 	for _, network := range networks {

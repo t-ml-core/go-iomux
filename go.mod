@@ -1,10 +1,12 @@
 module github.com/t-ml-core/go-iomux
 
-go 1.18
+go 1.23.0
+
+toolchain go1.24.3
 
 require (
-	github.com/stretchr/testify v1.8.1
-	golang.org/x/sys v0.4.0
+	github.com/stretchr/testify v1.10.0
+	golang.org/x/sys v0.33.0
 )
 
 require (

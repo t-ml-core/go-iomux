@@ -3,10 +3,11 @@ package main
 import (
 	"context"
 	"encoding/binary"
-	"github.com/t-ml-core/go-iomux"
 	"io"
 	"os"
 	"os/exec"
+
+	"github.com/t-ml-core/go-iomux"
 )
 
 type OutputType int
@@ -16,8 +17,10 @@ const (
 	StdErr
 )
 
-const colorRed = "\033[31m"
-const colorReset = "\033[0m"
+const (
+	colorRed   = "\033[31m"
+	colorReset = "\033[0m"
+)
 
 func main() {
 	mux := iomux.NewMuxUnixGram[OutputType]()

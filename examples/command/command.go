@@ -3,10 +3,11 @@ package main
 import (
 	"encoding/binary"
 	"errors"
-	"github.com/t-ml-core/go-iomux"
 	"io"
 	"os"
 	"os/exec"
+
+	"github.com/t-ml-core/go-iomux"
 )
 
 type OutputType int
